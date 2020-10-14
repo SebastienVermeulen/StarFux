@@ -81,14 +81,14 @@ void ShipCharacter::Initialize(const GameContext& gameContext)
 
 	//COLLISION
 	//*********
-	GameObject* temp = new GameObject();
+	GameObject* pTemp = new GameObject();
 	RigidBodyComponent* pRigidBodyComponent = new RigidBodyComponent();
-	temp->AddComponent(pRigidBodyComponent);
+	pTemp->AddComponent(pRigidBodyComponent);
 	pRigidBodyComponent->SetKinematic(true);
 	std::shared_ptr<physx::PxGeometry> pCubeGeometry{ new physx::PxBoxGeometry(1,1,1) };
-	temp->AddComponent(new ColliderComponent(pCubeGeometry, *pMaterial));
-	AddChild(temp);
-	m_pHitBoxChild = temp;
+	pTemp->AddComponent(new ColliderComponent(pCubeGeometry, *pMaterial));
+	AddChild(pTemp);
+	m_pHitBoxChild = pTemp;
 	m_pHitBoxChild->SetTag(L"PlayerHitBox");
 
 	//EXHAUST SPRITE
@@ -173,7 +173,7 @@ void ShipCharacter::Update(const GameContext& gameContext)
 	else
 	{
 		//Decelerate rotation
-		if (m_CurrentRotation.x > 0.001f)
+		if (m_CurrentRotation.x >= 0.001f)
 		{
 			if (m_RotationVelocity.x > 0.f)
 			{
@@ -183,7 +183,7 @@ void ShipCharacter::Update(const GameContext& gameContext)
 			m_RotationVelocity.x -= m_RotationAcceleration * elapsedSec;
 			m_RotationVelocity.x = std::max(m_RotationVelocity.x, -m_MaxRotationSpeed);
 		}
-		else if (m_CurrentRotation.x < -0.001f)
+		else if (m_CurrentRotation.x =< -0.001f)
 		{
 			if (m_RotationVelocity.x < 0.f)
 			{
@@ -219,7 +219,7 @@ void ShipCharacter::Update(const GameContext& gameContext)
 	else
 	{
 		//Deccelerate rotation
-		if (m_CurrentRotation.y > 0.001f)
+		if (m_CurrentRotation.y >= 0.001f)
 		{
 			if (m_RotationVelocity.y > 0.f)
 			{
@@ -229,7 +229,7 @@ void ShipCharacter::Update(const GameContext& gameContext)
 			m_RotationVelocity.y -= m_RotationAcceleration * elapsedSec;
 			m_RotationVelocity.y = std::max(m_RotationVelocity.y, -m_MaxRotationSpeed);
 		}
-		else if (m_CurrentRotation.y < -0.001f)
+		else if (m_CurrentRotation.y =< -0.001f)
 		{
 			if (m_RotationVelocity.y < 0.f)
 			{
@@ -287,7 +287,7 @@ void ShipCharacter::Update(const GameContext& gameContext)
 	Move(DirectX::XMFLOAT3(m_Velocity.x * elapsedSec, m_Velocity.y * elapsedSec, 0.f));
 }
 
-void ShipCharacter::Move(const DirectX::XMFLOAT3 displacement)
+void ShipCharacter::Move(const DirectX::XMFLOAT3& displacement)
 {
 	//Limit movement
 	DirectX::XMFLOAT3 clampedDisplacement = displacement;

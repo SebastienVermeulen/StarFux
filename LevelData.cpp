@@ -6,14 +6,14 @@
 LevelData::~LevelData()
 {
 	//Deleting the building prefabs
-	for (size_t idx{}; idx < m_StructureAssets.size(); idx++)
+	for (size_t idx = 0; idx < m_StructureAssets.size(); idx++)
 	{
 		SafeDelete(m_StructureAssets[idx]);
 	}
 	m_StructureAssets.clear();
 
 	//Deleting the building instances
-	for (size_t idx{}; idx < m_Buildings.size(); idx++)
+	for (size_t idx = 0; idx < m_Buildings.size(); idx++)
 	{
 		SafeDelete(m_Buildings[idx]);
 	}
@@ -42,7 +42,7 @@ void LevelData::AddBuilding(BuildingData* data)
 	}
 }
 
-void LevelData::AddCameraRailPos(DirectX::XMFLOAT3 data)
+void LevelData::AddCameraRailPos(DirectX::XMFLOAT3& data)
 {
 	//The rail does not check for duplicates
 	//It can pass over the same spot multiple times

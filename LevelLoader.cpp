@@ -38,7 +38,7 @@ LevelData* LevelLoader::LoadContent(const std::wstring& assetFile)
 		DirectX::XMFLOAT3 scale = ReadFloat3(unparsedLine);
 
 		//Add the prefab to the level data
-		pLevelData->AddStructureAsset(new BuildingAsset{ pathMode, triggerScale, pathDiff, pathSpec, pathNorm, pos, rot, scale });
+		pLevelData->AddStructureAsset(new BuildingAsset{ triggerScale, pos, rot, scale, pathMode, pathDiff, pathSpec, pathNorm });
 
 		//Read next line
 		unparsedLine = bReader->ReadNullString();
@@ -63,7 +63,7 @@ LevelData* LevelLoader::LoadContent(const std::wstring& assetFile)
 		int health = (int)ReadInt(unparsedLine);
 
 		//Add the to be created building to the level data
-		BuildingData* pData = new BuildingData{ id, pos, rot, scale, health };
+		BuildingData* pData = new BuildingData{ pos, rot, scale, id, health };
 		pLevelData->AddBuilding(pData);
 
 		//Read next line

@@ -5,22 +5,22 @@ class GameObject;
 
 struct BuildingAsset
 {
-	std::wstring meshAssetPath{};
 	DirectX::XMFLOAT3 triggerScale{};
-	std::wstring diffAssetPath{};
-	std::wstring specAssetPath{};
-	std::wstring normAssetPath{};
 	DirectX::XMFLOAT3 pos{};
 	DirectX::XMFLOAT3 rot{};
 	DirectX::XMFLOAT3 scale{};
+	std::wstring meshAssetPath{};
+	std::wstring diffAssetPath{};
+	std::wstring specAssetPath{};
+	std::wstring normAssetPath{};
 };
 
 struct BuildingData 
 {
-	int id{};
 	DirectX::XMFLOAT3 pos{};
 	DirectX::XMFLOAT3 rot{};
 	DirectX::XMFLOAT3 scale{};
+	int id{};
 	int health{};
 };
 
@@ -37,7 +37,7 @@ public:
 
 	void AddStructureAsset(BuildingAsset* data);
 	void AddBuilding(BuildingData* data);
-	void AddCameraRailPos(DirectX::XMFLOAT3 data);
+	void AddCameraRailPos(DirectX::XMFLOAT3& data);
 
 	inline std::vector<BuildingAsset*> GetStructureAssets() { return m_StructureAssets; }
 	inline std::vector<BuildingData*> GetBuildings() { return m_Buildings; }
